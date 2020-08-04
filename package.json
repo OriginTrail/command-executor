@@ -1,0 +1,22 @@
+{
+  "name": "@origintrail/command-executor",
+  "version": "1.0.0",
+  "description": "Manage and execute javascript commands.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OriginTrail/command-executor.git"
+  },
+  "keywords": [
+    "command-executor"
+  ],
+  "author": "OriginTrail",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OriginTrail/command-executor/issues"
+  },
+  "homepage": "https://github.com/OriginTrail/command-executor#readme"
+}
