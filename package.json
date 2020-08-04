@@ -18,5 +18,10 @@
   "bugs": {
     "url": "https://github.com/OriginTrail/command-executor/issues"
   },
-  "homepage": "https://github.com/OriginTrail/command-executor#readme"
+  "homepage": "https://github.com/OriginTrail/command-executor#readme",
+  "dependencies": {
+    "async": "^3.2.0",
+    "p-iteration": "^1.1.8",
+    "sleep-async": "^1.0.5"
+  }
 }
