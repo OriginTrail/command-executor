@@ -1,7 +1,7 @@
 const async = require('async');
 const Models = require('../models');
 const Command = require('./command');
-const constants = require('constants.js');
+const constants = require('./constants');
 
 const sleep = require('sleep-async')().Promise;
 const { forEach } = require('p-iteration');

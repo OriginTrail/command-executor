@@ -19,14 +19,13 @@ exports.HANDLER_IDS_COMMAND_CLEANUP_TIME_MILLS = 60 * 60 * 1000;
  * @constant {Array} PERMANENT_COMMANDS - List of all permanent commands
  */
 exports.PERMANENT_COMMANDS = [
-    'cleanerCommand', 'autoupdaterCommand'
+    'cleanerCommand', 'autoupdaterCommand',
 ];
 
 /**
  * @constant {number} MAX_COMMAND_DELAY_IN_MILLS - Maximum delay for commands
  */
 exports.MAX_COMMAND_DELAY_IN_MILLS = 14400 * 60 * 1000; // 10 days
-
 
 /**
  * @constant {number} DEFAULT_COMMAND_REPEAT_IN_MILLS - Default repeat interval

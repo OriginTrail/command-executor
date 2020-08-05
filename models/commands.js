@@ -1,11 +1,11 @@
-const uuidv4 = require('uuid/v4');
+const uuid = require('uuid');
 
 module.exports = (sequelize, DataTypes) => {
     const offers = sequelize.define('commands', {
         id: {
             type: DataTypes.UUID,
             primaryKey: true,
-            defaultValue: () => uuidv4(),
+            defaultValue: () => uuid.v4(),
         },
         name: DataTypes.STRING,
         data: DataTypes.JSON,

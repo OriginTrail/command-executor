@@ -4,7 +4,8 @@
   "description": "Manage and execute javascript commands.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "./node_modules/.bin/eslint --quiet migrations/ models/ modules/ .eslintrc.js"
   },
   "repository": {
     "type": "git",
@@ -22,10 +23,16 @@
   "dependencies": {
     "async": "^3.2.0",
     "dotenv": "^8.2.0",
+    "eslint": "^4.19.1",
     "p-iteration": "^1.1.8",
     "sequelize": "^4.44.4",
     "sequelize-cli": "^5.5.1",
     "sleep-async": "^1.0.5",
-    "uuid": "^8.3.0"
+    "uuid": "^8.3.0",
+    "babel-eslint": "^8.2.6",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.9.1"
   }
 }
