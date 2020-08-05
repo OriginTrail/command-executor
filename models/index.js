@@ -10,7 +10,7 @@ var env = process.env.NODE_ENV || 'testnet';
 process.env.NODE_ENV = env; // Set for child processes.
 
 // eslint-disable-next-line import/no-dynamic-require
-var config = require(`${__dirname}/../config/sequelizeConfig`)[env];
+var config = require(`${__dirname}/../sequelizeConfig`)[env];
 var db = {};
 var sequelize = {};
 

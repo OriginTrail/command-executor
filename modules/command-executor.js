@@ -1,8 +1,7 @@
 const async = require('async');
 const Models = require('../models');
 const Command = require('./command');
-const constants = require('./constants');
-
+const merge = require('merge');
 const sleep = require('sleep-async')().Promise;
 const { forEach } = require('p-iteration');
 
@@ -29,14 +28,22 @@ const QUEUE_PARALLELISM = 4;
  * Queues and processes commands
  */
 class CommandExecutor {
-    constructor(ctx) {
-        this.ctx = ctx;
+    static get DEFAULTS() {
+        return {
+            MAX_COMMAND_DELAY_IN_MILLS: 14400 * 60 * 1000, // 10 days
+            DEFAULT_COMMAND_REPEAT_INTERVAL_IN_MILLS: 5000, // 5 seconds
+            VERBOSE_LOGGING_ENABLED: true,
+        };
+    }
+
+    constructor(ctx, options) {
         this.logger = ctx.logger;
         this.commandResolver = ctx.commandResolver;
+        this.options = merge(CommandExecutor.DEFAULTS, this.options);
         this.started = false;
 
         this.parallelism = QUEUE_PARALLELISM;
-        this.verboseLoggingEnabled = ctx.config.commandExecutorVerboseLoggingEnabled;
+        this.verboseLoggingEnabled = this.options.VERBOSE_LOGGING_ENABLED;
 
         const that = this;
         this.queue = async.queue(async (command, callback) => {
@@ -51,7 +58,7 @@ class CommandExecutor {
                 }
                 await this._execute(command);
             } catch (e) {
-                this.logger.error(`Something went really wrong! OT-node shutting down... ${e}`);
+                this.logger.error(`Something went really wrong! Command executor shutting down... ${e}`);
                 process.exit(1);
             }
 
@@ -63,9 +70,13 @@ class CommandExecutor {
      * Initialize executor
      * @returns {Promise<void>}
      */
-    async init() {
+    async init(commands) {
+        await Models.commands.destroy({
+            where: {},
+            truncate: true,
+        });
         await forEach(
-            constants.PERMANENT_COMMANDS,
+            commands,
             async command => this._startDefaultCommand(command),
         );
         if (this.verboseLoggingEnabled) {
@@ -120,7 +131,11 @@ class CommandExecutor {
             if (this.verboseLoggingEnabled) {
                 this.logger.trace(`Command ${command.name} with ID ${command.id} should be delayed`);
             }
-            await this.add(command, Math.min(waitMs, constants.MAX_COMMAND_DELAY_IN_MILLS), false);
+            await this.add(
+                command,
+                Math.min(waitMs, this.options.MAX_COMMAND_DELAY_IN_MILLS),
+                false,
+            );
             return;
         }
 
@@ -140,7 +155,7 @@ class CommandExecutor {
                     command.data = handler.pack(command.data);
 
                     const period = command.period ?
-                        command.period : constants.DEFAULT_COMMAND_REPEAT_INTERVAL_IN_MILLS;
+                        command.period : this.options.DEFAULT_COMMAND_REPEAT_INTERVAL_IN_MILLS;
                     await this.add(command, period, false);
                     return Command.repeat();
                 }
@@ -223,12 +238,12 @@ class CommandExecutor {
     async add(command, delay = 0, insert = true) {
         const now = Date.now();
 
-        if (delay != null && delay > constants.MAX_COMMAND_DELAY_IN_MILLS) {
+        if (delay != null && delay > this.options.MAX_COMMAND_DELAY_IN_MILLS) {
             if (command.ready_at == null) {
                 command.ready_at = now;
             }
             command.ready_at += delay;
-            delay = constants.MAX_COMMAND_DELAY_IN_MILLS;
+            delay = this.options.MAX_COMMAND_DELAY_IN_MILLS;
         }
 
         if (insert) {
@@ -369,7 +384,7 @@ class CommandExecutor {
      * @returns {Promise<void>}
      */
     async replay() {
-        this.logger.notify('Replay pending/started commands from the database...');
+        this.logger.trace('Replay pending/started commands from the database...');
         const pendingCommands = (await Models.commands.findAll({
             where: {
                 status: {
@@ -380,7 +395,7 @@ class CommandExecutor {
                 },
                 name: { [Models.Sequelize.Op.notIn]: ['cleanerCommand', 'autoupdaterCommand'] },
             },
-        })).filter(command => !constants.PERMANENT_COMMANDS.includes(command.name));
+        }));
 
         // TODO consider JOIN instead
         const commands = pendingCommands.filter(async (pc) => {

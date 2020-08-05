@@ -8,3 +8,4 @@ system/*
 test.*
 logs/*
 package-lock.json
+system.db
