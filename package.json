@@ -1,6 +1,6 @@
 {
   "name": "@tracelabs/command-executor",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Manage and execute javascript commands.",
   "main": "index.js",
   "scripts": {
