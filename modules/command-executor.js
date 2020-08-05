@@ -36,10 +36,10 @@ class CommandExecutor {
         };
     }
 
-    constructor(ctx, options) {
+    constructor(ctx) {
         this.logger = ctx.logger;
         this.commandResolver = ctx.commandResolver;
-        this.options = merge(CommandExecutor.DEFAULTS, this.options);
+        this.options = merge(CommandExecutor.DEFAULTS, ctx.options);
         this.started = false;
 
         this.parallelism = QUEUE_PARALLELISM;

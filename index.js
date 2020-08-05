@@ -5,13 +5,14 @@ const CommandResolver = require('./modules/command-resolver')
 const awilix = require('awilix');
 
 class CommandExecutorWrapper {
-    constructor() {
+    constructor(options) {
         this.container = awilix.createContainer({
             injectionMode: awilix.InjectionMode.PROXY,
         });
 
         this.container.register({
             logger: awilix.asValue(log),
+            options: awilix.asValue(options),
             command: awilix.asClass(Command).singleton(),
             commandExecutor: awilix.asClass(CommandExecutor).singleton(),
             commandResolver: awilix.asClass(CommandResolver).singleton(),

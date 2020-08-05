@@ -10,7 +10,7 @@ if (!process.env.NODE_ENV) {
 
 const storagePath = process.env.SEQUELIZEDB ?
     process.env.SEQUELIZEDB :
-    path.join(homedir, `${pjson.name.substring(pjson.name.lastIndexOf('/')+1)}`, 'system.db');
+    path.join(homedir, `${pjson.name.substring(pjson.name.lastIndexOf('/') + 1)}`, 'system.db');
 
 module.exports = {
     [process.env.NODE_ENV]: {
