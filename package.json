@@ -21,7 +21,11 @@
   "homepage": "https://github.com/OriginTrail/command-executor#readme",
   "dependencies": {
     "async": "^3.2.0",
+    "dotenv": "^8.2.0",
     "p-iteration": "^1.1.8",
-    "sleep-async": "^1.0.5"
+    "sequelize": "^4.44.4",
+    "sequelize-cli": "^5.5.1",
+    "sleep-async": "^1.0.5",
+    "uuid": "^8.3.0"
   }
 }
