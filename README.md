@@ -1,7 +1,7 @@
 # Command executor
-Command executor module manage and execute javascript commands. It is primarly used in OriginTrail Node and nOS Data Pipeline projects as a core module for managing and executing commands.
+Command executor is designed to manage and execute javascript commands. It is primarly used in OriginTrail Node and nOS Data Pipeline projects as a core module for managing and executing commands.
 
-Company Website: origintrail.io
+Company Website: https://tracelabs.io
 
 ## Installation
 Instructions for installation and configuration of command executor module:
