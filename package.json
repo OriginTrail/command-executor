@@ -1,5 +1,5 @@
 {
-  "name": "@origintrail/command-executor",
+  "name": "@tracelabs/command-executor",
   "version": "1.0.0",
   "description": "Manage and execute javascript commands.",
   "main": "index.js",
@@ -12,7 +12,10 @@
     "url": "git+https://github.com/OriginTrail/command-executor.git"
   },
   "keywords": [
-    "command-executor"
+    "command-executor",
+    "ot-node",
+    "origintrail",
+    "tracelabs"
   ],
   "author": "OriginTrail",
   "license": "ISC",
