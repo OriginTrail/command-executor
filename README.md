@@ -10,7 +10,7 @@ Instructions for installation and configuration of command executor module:
 git clone https://github.com/OriginTrail/command-executor.git
 npm install
 sequelize --config=./sequelizeConfig.js db:migrate
-node index.js
+node example.js
 ```
 
 ## Contribution
