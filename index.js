@@ -1,7 +1,7 @@
 const log = require('./modules/logger');
 const Command = require('./modules/command');
-const CommandExecutor = require('./modules/command-executor')
-const CommandResolver = require('./modules/command-resolver')
+const CommandExecutor = require('./modules/command-executor');
+const CommandResolver = require('./modules/command-resolver');
 const awilix = require('awilix');
 
 class CommandExecutorWrapper {
@@ -44,6 +44,10 @@ class CommandExecutorWrapper {
 
     resolve(name) {
         return this.container.resolve(name);
+    }
+
+    getContainer() {
+        return this.container;
     }
 }
 
