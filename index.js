@@ -4,7 +4,7 @@ const CommandExecutor = require('./modules/command-executor');
 const CommandResolver = require('./modules/command-resolver');
 const awilix = require('awilix');
 
-class CommandExecutorWrapper {
+class CommandExecutorController {
     constructor(options) {
         this.container = awilix.createContainer({
             injectionMode: awilix.InjectionMode.PROXY,
@@ -51,4 +51,4 @@ class CommandExecutorWrapper {
     }
 }
 
-module.exports = CommandExecutorWrapper;
+module.exports = CommandExecutorController;
