@@ -34,6 +34,7 @@
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.9.1",
+    "eslint-scope": "^5.1.0",
     "merge": "^1.2.1",
     "p-iteration": "^1.1.8",
     "sequelize": "^4.44.4",
