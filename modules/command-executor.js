@@ -1,5 +1,5 @@
 const async = require('async');
-const Models = require('../models');
+const Models = require('../database/models');
 const Command = require('./command');
 const merge = require('merge');
 const sleep = require('sleep-async')().Promise;

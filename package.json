@@ -1,11 +1,11 @@
 {
   "name": "@tracelabs/command-executor",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Manage and execute javascript commands.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "./node_modules/.bin/eslint --quiet migrations/ models/ modules/ .eslintrc.js"
+    "lint": "./node_modules/.bin/eslint --quiet database/migrations/ models/ modules/ .eslintrc.js"
   },
   "repository": {
     "type": "git",
