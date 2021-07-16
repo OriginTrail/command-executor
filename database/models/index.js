@@ -5,12 +5,8 @@ var path = require('path');
 var Sequelize = require('sequelize');
 
 var basename = path.basename(__filename);
-var env = process.env.ENV || 'development';
 
-process.env.ENV = env; // Set for child processes.
-
-// eslint-disable-next-line import/no-dynamic-require
-var config = require(`${__dirname}/../sequelizeConfig`)[env];
+var config = require(`${__dirname}/../sequelizeConfig`);
 var db = {};
 var sequelize = {};
 
