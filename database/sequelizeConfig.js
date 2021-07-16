@@ -2,7 +2,6 @@ require('dotenv').config();
 const path = require('path');
 const getPath = () => {
     if(process.env.npm_lifecycle_script){
-        // called via package npm i postinstall hook 
         return path.resolve('database', 'system.db');
     }
     return path.resolve('node_modules','@tracelabs', 'command-executor', 'database', 'system.db')
