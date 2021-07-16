@@ -1,32 +1,30 @@
 require('dotenv').config();
 const path = require('path');
-const homedir = require('os').homedir();
-const pjson = require('../package.json');
-
-if (!process.env.ENV) {
-    // Environment not set. Use the production.
-    process.env.ENV = 'development';
+const getPath = () => {
+    if(process.env.npm_lifecycle_script){
+        // called via package npm i postinstall hook 
+        return path.resolve('database', 'system.db');
+    }
+    return path.resolve('node_modules','@tracelabs', 'command-executor', 'database', 'system.db')
 }
 
-const storagePath = path.resolve('database', 'system.db');
+const storagePath = getPath();
 
 module.exports = {
-    [process.env.ENV]: {
-        dialect: 'sqlite',
-        storage: storagePath,
-        migrationStorageTableName: 'sequelize_meta',
-        logging: false,
-        operatorsAliases: false,
-        define: {
-            underscored: true,
-            timestamps: false,
-        },
-        retry: {
-            match: [
-                /SQLITE_BUSY/,
-            ],
-            name: 'query',
-            max: 5,
-        },
+    dialect: 'sqlite',
+    storage: storagePath,
+    migrationStorageTableName: 'sequelize_meta',
+    logging: false,
+    operatorsAliases: false,
+    define: {
+        underscored: true,
+        timestamps: false,
+    },
+    retry: {
+        match: [
+            /SQLITE_BUSY/,
+        ],
+        name: 'query',
+        max: 5,
     },
 };
