@@ -6,7 +6,6 @@ var Sequelize = require('sequelize');
 
 var basename = path.basename(__filename);
 
-// eslint-disable-next-line import/no-dynamic-require
 var config = require(`${__dirname}/../sequelizeConfig`);
 var db = {};
 var sequelize = {};
