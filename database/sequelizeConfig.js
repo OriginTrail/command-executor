@@ -1,11 +1,12 @@
 require('dotenv').config();
 const path = require('path');
+
 const getPath = () => {
-    if(process.env.npm_lifecycle_script){
+    if (process.env.npm_lifecycle_script === 'npx sequelize-cli db:migrate') {
         return path.resolve('database', 'system.db');
     }
-    return path.resolve('node_modules','@tracelabs', 'command-executor', 'database', 'system.db')
-}
+    return path.resolve('node_modules', '@tracelabs', 'command-executor', 'database', 'system.db');
+};
 
 const storagePath = getPath();
 
